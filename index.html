@@ -1,0 +1,563 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>For Piraa ♡</title>
+
+  <style>
+    :root {
+      --pink: #f5a9c6;
+      --pink-light: #fff0f6;
+      --pink-dark: #c96e96;
+      --cream: #fffaf5;
+      --text: #80576b;
+      --white: #ffffff;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Trebuchet MS", Arial, sans-serif;
+      background: var(--pink-light);
+      color: var(--text);
+      text-align: center;
+    }
+
+    button {
+      border: none;
+      font: inherit;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 7px 16px #d88eaf55;
+    }
+
+    .page {
+      min-height: 100vh;
+      padding: 45px 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .opening {
+      background:
+        radial-gradient(circle at 10% 15%, #ffffff 0 5px, transparent 6px),
+        radial-gradient(circle at 90% 25%, #ffffff 0 7px, transparent 8px),
+        linear-gradient(160deg, #fff7fb, #ffe1ed);
+    }
+
+    .eyebrow {
+      font-size: 0.8rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--pink-dark);
+    }
+
+    h1 {
+      font-size: clamp(2.3rem, 8vw, 4.5rem);
+      margin: 12px 0;
+      color: var(--pink-dark);
+      line-height: 1.15;
+    }
+
+    h2 {
+      color: var(--pink-dark);
+    }
+
+    p {
+      line-height: 1.8;
+    }
+
+    .subtitle {
+      max-width: 440px;
+      margin: 10px auto 24px;
+    }
+
+    .envelope-button {
+      background: transparent;
+      font-size: clamp(6rem, 20vw, 9rem);
+      padding: 0;
+      animation: float 2.5s ease-in-out infinite;
+      filter: drop-shadow(0 10px 8px #d68dad55);
+    }
+
+    .primary-button {
+      background: var(--pink);
+      color: white;
+      border-radius: 30px;
+      padding: 14px 24px;
+      box-shadow: 0 5px 12px #d88eaf55;
+      margin: 8px;
+    }
+
+    .secondary-button {
+      background: white;
+      color: var(--pink-dark);
+      border: 1px solid #f5c2d6;
+      border-radius: 30px;
+      padding: 12px 20px;
+      margin: 8px;
+    }
+
+    .sticker {
+      font-size: 2rem;
+      margin: 12px;
+    }
+
+    .card {
+      width: min(100%, 600px);
+      background: #ffffffed;
+      padding: clamp(22px, 5vw, 38px);
+      border-radius: 28px;
+      border: 2px solid #f9c8dc;
+      box-shadow: 0 12px 35px #dba0bd30;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    .cake {
+      font-size: clamp(5rem, 17vw, 7rem);
+      animation: float 2s ease-in-out infinite;
+    }
+
+    .letter {
+      text-align: left;
+      white-space: normal;
+      line-height: 1.95;
+    }
+
+    .letter-sign {
+      text-align: right;
+      color: var(--pink-dark);
+      font-style: italic;
+    }
+
+    .gallery-page {
+      background: linear-gradient(#fff0f6, #fff9fc);
+    }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+      width: min(100%, 650px);
+      margin: 24px auto;
+    }
+
+    .photo-card {
+      background: white;
+      padding: 10px 10px 16px;
+      border-radius: 15px;
+      box-shadow: 0 5px 15px #dba0bd30;
+      transform: rotate(-1deg);
+    }
+
+    .photo-card:nth-child(even) {
+      transform: rotate(1.5deg);
+    }
+
+    .photo-frame {
+      aspect-ratio: 4 / 5;
+      background: #ffe4ef;
+      border-radius: 9px;
+      overflow: hidden;
+      display: grid;
+      place-items: center;
+      position: relative;
+    }
+
+    .photo-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .photo-placeholder {
+      font-size: 2.5rem;
+      padding: 12px;
+    }
+
+    .photo-caption {
+      font-size: 0.85rem;
+      margin: 12px 0 0;
+    }
+
+    .music-button {
+      position: fixed;
+      right: 16px;
+      bottom: 16px;
+      z-index: 20;
+      border-radius: 30px;
+      background: white;
+      color: var(--pink-dark);
+      border: 1px solid #f4bfd4;
+      padding: 12px 16px;
+      box-shadow: 0 4px 15px #b9799633;
+    }
+
+    .heart {
+      position: fixed;
+      bottom: -35px;
+      z-index: 30;
+      pointer-events: none;
+      animation: rise 4s linear forwards;
+    }
+
+    .confetti {
+      position: fixed;
+      top: -35px;
+      z-index: 30;
+      pointer-events: none;
+      animation: fall 3.5s linear forwards;
+    }
+
+    footer {
+      padding: 24px 12px 85px;
+      background: #ffe5ef;
+      font-size: 0.85rem;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0) rotate(-2deg); }
+      50% { transform: translateY(-12px) rotate(2deg); }
+    }
+
+    @keyframes rise {
+      to {
+        transform: translateY(-110vh) rotate(25deg);
+        opacity: 0;
+      }
+    }
+
+    @keyframes fall {
+      to {
+        transform: translateY(110vh) rotate(700deg);
+        opacity: 0.2;
+      }
+    }
+
+    @media (max-width: 420px) {
+      .gallery {
+        gap: 9px;
+      }
+
+      .photo-card {
+        padding: 7px 7px 12px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- MUSIK: nanti letakkan file lagu.mp3 di folder yang sama -->
+  <audio id="birthdayMusic" src="lagu.mp3" loop preload="none"></audio>
+
+  <button class="music-button" id="musicButton" onclick="toggleMusic()">
+    🎵 Play music
+  </button>
+
+  <!-- HALAMAN 1: PEMBUKA -->
+  <section class="page opening" id="opening">
+    <div class="sticker">🎀 🐰 🌷</div>
+    <p class="eyebrow">a little something for you</p>
+
+    <button class="envelope-button" onclick="openSurprise()"
+      aria-label="Buka amplop">
+      💌
+    </button>
+
+    <h1>Hiii, Piraa! ♡</h1>
+    <p class="subtitle">
+      A little suprise, just for you hehe
+    </p>
+
+    <button class="primary-button" onclick="openSurprise()">
+      Open your surprise 💗
+    </button>
+
+    <p>psst... click the envelope too! ✨</p>
+    <div class="sticker">🧸 💕 🍰</div>
+  </section>
+
+  <!-- HALAMAN 2: KEJUTAN ULANG TAHUN -->
+  <section class="page hidden" id="surprise">
+    <div class="card">
+      <p class="eyebrow">IT'S your SPECIAL DAY!</p>
+      <div class="cake">🎂</div>
+      <h1>Happy Birthday!</h1>
+
+      <p>
+        Happy Birthday, Piraa lemm! 💗
+      </p>
+      <p>
+        Semoga bahagia selalu, sehat teruss, dilancarkan urusannya,
+        dan semoga semua yang kamu pengen bisa tercapai.
+        Stay happy, stay pretty, and you deserve all the best. 🦋
+      </p>
+
+      <div class="sticker">🌷 🐻 🎀 🐰</div>
+
+      <button class="primary-button" onclick="showLetter()">
+        Reed 💌
+      </button>
+
+      <button class="secondary-button" onclick="showGallery()">
+        Look 📸
+      </button>
+    </div>
+  </section>
+
+  <!-- HALAMAN 3: SURAT PERSONAL -->
+  <section class="page hidden" id="letter">
+    <div class="card">
+      <p class="eyebrow">from me to you</p>
+      <div class="sticker">💌 🧸 💗</div>
+      <h1 style="font-size: 2.5rem">Dear Piraa,</h1>
+
+      <div class="letter">
+        Happy birthday, Piraa! 🩷
+
+        <br><br>
+        lucu ya kalau dipikir-pikir, awal kita ketemu karna
+        satu dosbing KRS dan kamu pinjemin lem ke aku hehehe.
+        terus sekarang kita udah punya cerita dan kesibukan 
+        masing-masing di pulau yang berbeda pula huhuhu. 🥹
+        <br><br>
+
+        jujur ya pirr, aku seneng banget liat kamu sekarang
+        dan sometimes iri juga lihat kamu yang lagi S2 hehehe.
+        semoga apa pun yang lagi kamu jalanin sekarang selalu 
+        dilancarkan mulai dari kuliah, tugas-tugasnya, sampai
+        nanti dapat title baru lagii. semoga kamu juga selalu 
+        dikelilingi orang-orang baik yang tulus, yang bisa jadi
+        teman cerita dan nggak punya niat jahat sama kamu.
+
+        <br><br>
+
+        sekarang mungkin kita nggak selalu tahu cerita satu sama 
+        lain setiap harinya, tapi please tetap jadi temanku yang 
+        baik, yaa. Teman yang selalu sabar menghadapi semua 
+        tingkah random-ku hehehe. Semoga nanti kita bisa ketemu 
+        lagi, liburan bareng, jalan-jalan bareng, ngobrol nggak 
+        jelas, dan melakukan banyak hal seru lainnya. And the most 
+        important thing, semoga kamu dijauhkan dari cowok-cowok 
+        bazingan, AAMIIN PALING KERAS. 😭🙏🏻
+
+        <br><br>
+
+        I'm always wishing the best for you, Kak. You deserve 
+        so much happiness and beautiful things in life. 🫶🏻 
+        Dan jangan lupa istirahat, makan yang cukup, dan take
+        your time kak. kamu harus happyr terus dan enjoy semua 
+        prosesnya.🌷
+
+        <br><br>
+
+        Have the happiest birthday, Piraa! Love youu and miss youu! 🌷💗
+      </div>
+
+      <p class="letter-sign">
+        With love, ♡<br>
+        maiii gemess hehe 🎀
+      </p>
+
+      <button class="primary-button" onclick="showGallery()">
+        Look 📸
+      </button>
+
+      <button class="secondary-button" onclick="backToStart()">
+        Reed again ↺
+      </button>
+    </div>
+  </section>
+
+  <!-- HALAMAN 4: GALERI FOTO -->
+  <section class="page gallery-page hidden" id="gallery">
+    <p class="eyebrow">little moments, big memories</p>
+    <h1 style="font-size: 2.7rem">Our Memories ♡</h1>
+
+    <p>
+      a little picture.
+    </p>
+
+    <div class="gallery">
+
+      <div class="photo-card">
+        <div class="photo-frame">
+          <img src="foto1.jpg" alt="Kenangan pertama bersama"
+            onerror="this.style.display='none'; this.nextElementSibling.style.display='grid'">
+          <div class="photo-placeholder" style="display:none">
+            📸 💗
+          </div>
+        </div>
+        <p class="photo-caption">🌷</p>
+      </div>
+
+      <div class="photo-card">
+        <div class="photo-frame">
+          <img src="foto2.jpg" alt="Kenangan kedua bersama"
+            onerror="this.style.display='none'; this.nextElementSibling.style.display='grid'">
+          <div class="photo-placeholder" style="display:none">
+            🧸 💕
+          </div>
+        </div>
+        <p class="photo-caption">🎀</p>
+      </div>
+
+      <div class="photo-card">
+        <div class="photo-frame">
+          <img src="foto3.jpg" alt="Kenangan ketiga bersama"
+            onerror="this.style.display='none'; this.nextElementSibling.style.display='grid'">
+          <div class="photo-placeholder" style="display:none">
+            🌸 🐰
+          </div>
+        </div>
+        <p class="photo-caption">✨</p>
+      </div>
+
+      <div class="photo-card">
+        <div class="photo-frame">
+          <img src="foto4.jpg" alt="Kenangan keempat bersama"
+            onerror="this.style.display='none'; this.nextElementSibling.style.display='grid'">
+          <div class="photo-placeholder" style="display:none">
+            💌 🍰
+          </div>
+        </div>
+        <p class="photo-caption">♡</p>
+      </div>
+
+    </div>
+
+    <p>Different islands, same friendship. 💗</p>
+
+    <button class="primary-button" onclick="showLetter()">
+      Reed Again 💌
+    </button>
+
+    <button class="secondary-button" onclick="backToStart()">
+      First Page 🏠
+    </button>
+  </section>
+
+  <footer>
+    made with a little laught, for Piraa ♡<br>
+    a little supprise for my last roomate 🌷
+  </footer>
+
+  <script>
+    const music = document.getElementById("birthdayMusic");
+    const musicButton = document.getElementById("musicButton");
+
+    function hidePages() {
+      ["opening", "surprise", "letter", "gallery"].forEach(id => {
+        document.getElementById(id).classList.add("hidden");
+      });
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    function openSurprise() {
+      hidePages();
+      document.getElementById("surprise").classList.remove("hidden");
+      makeConfetti();
+      makeHearts();
+    }
+
+    function showLetter() {
+      hidePages();
+      document.getElementById("letter").classList.remove("hidden");
+      makeHearts();
+    }
+
+    function showGallery() {
+      hidePages();
+      document.getElementById("gallery").classList.remove("hidden");
+    }
+
+    function backToStart() {
+      hidePages();
+      document.getElementById("opening").classList.remove("hidden");
+    }
+
+    async function toggleMusic() {
+      if (music.paused) {
+        try {
+          await music.play();
+          musicButton.textContent = "⏸ Stop music";
+        } catch (error) {
+          alert(
+            "Musik belum bisa diputar. Pastikan file lagu.mp3 " +
+            "sudah diletakkan di folder yang sama dengan index.html."
+          );
+        }
+      } else {
+        music.pause();
+        musicButton.textContent = "🎵 Play music";
+      }
+    }
+
+    function makeHearts() {
+      const icons = ["💗", "💕", "♡", "🌷", "🎀"];
+
+      for (let i = 0; i < 18; i++) {
+        setTimeout(() => {
+          const item = document.createElement("div");
+          item.className = "heart";
+          item.textContent = icons[Math.floor(Math.random() * icons.length)];
+          item.style.left = Math.random() * 100 + "vw";
+          item.style.fontSize = (18 + Math.random() * 20) + "px";
+          item.style.animationDuration = (3 + Math.random() * 2) + "s";
+          document.body.appendChild(item);
+          setTimeout(() => item.remove(), 5000);
+        }, i * 100);
+      }
+    }
+
+    function makeConfetti() {
+      const icons = ["🎉", "✨", "💗", "🌸", "🎀"];
+
+      for (let i = 0; i < 45; i++) {
+        setTimeout(() => {
+          const item = document.createElement("div");
+          item.className = "confetti";
+          item.textContent = icons[Math.floor(Math.random() * icons.length)];
+          item.style.left = Math.random() * 100 + "vw";
+          item.style.fontSize = (12 + Math.random() * 18) + "px";
+          item.style.animationDuration = (2.5 + Math.random() * 2) + "s";
+          document.body.appendChild(item);
+          setTimeout(() => item.remove(), 5000);
+        }, i * 35);
+      }
+    }
+  </script>
+
+</body>
+</html>
